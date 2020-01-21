@@ -11,3 +11,26 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@font-face {
+  font-family: 'Cream Cake';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./assets/Cream Cake.otf'); /* IE9 Compat Modes */
+  src: local('Cream Cake'), local('Cream Cake'),
+       url('./assets/Cream Cake.otf') format('otf'), /* Modern Browsers */
+}
+
+
+.form-sizer {
+  width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* LOGIN PAGE */
+.login-heading {
+  width: 100%;
+  text-align: center;
+  font-family: 'Cream Cake';
+}

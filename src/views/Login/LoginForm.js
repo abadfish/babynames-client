@@ -1,0 +1,51 @@
+import React, { useState } from 'react'
+import { reduxForm } from 'redux-form'
+import { Form, FormField, Button, TextInput, Box } from 'grommet'
+
+const LoginForm = (props) => {
+  console.log(props)
+
+  const [ user, setUser ] = useState({
+    userName: '',
+    password: '',
+  })
+
+  const handleOnChange = e => {
+    const { name, value } = e.target
+    setUser({ ...user, [name]: value })
+  }
+  console.log(user)
+  const handleSubmit = () => {
+    console.log(user)
+    props.onSubmit(user)
+  }
+  return (
+    <div>
+      <Box align="center" >
+        <Form>
+          <Box pad="xsmall"  >
+            <TextInput
+              placeholder="username"
+              name='userName'
+              value={ user.userName }
+              onChange={ handleOnChange }
+            />
+          </Box>
+          <Box pad="xsmall"  >
+            <TextInput
+              placeholder="password"
+              name='password'
+              value={ user.password }
+              onChange={ handleOnChange }
+            />
+          </Box>
+          <Box pad="small" align="center">
+            <Button  pad="medium" type='submit' primary label='Submit' onClick={handleSubmit} />
+          </Box>
+        </Form>
+      </Box>
+    </div>
+  )
+}
+
+export default LoginForm

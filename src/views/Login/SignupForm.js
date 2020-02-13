@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Form, Button, TextInput, Box, Text, RadioButtonGroup } from 'grommet'
 
 const SignupForm = (props) => {
@@ -36,7 +36,6 @@ console.log(baby)
     setUser({
       ...user,
       userBaby: baby,
-      relationship: 'parent'
     })
   }
 
@@ -46,6 +45,11 @@ console.log(baby)
   const handleInvite = e => {
     setBaby({ ...baby, invite_code: e.target.value })
   }
+  useEffect(() => {
+    if (baby.invite_code !== '') {
+      handleAddBaby()
+    }
+  },[baby.invite_code])
 
   const handleSetRelationship = e => {
     setUser({ ...user, relationship: e.target.value })
@@ -59,7 +63,7 @@ console.log(baby)
   return (
     <div className='form-sizer'>
         <Form>
-          <Box pad="xsmall"  >
+          <Box pad="xsmall" background="dark-1">
             <TextInput
               placeholder="name"
               name='name'
@@ -67,7 +71,7 @@ console.log(baby)
               onChange={ handleOnChange }
             />
           </Box>
-          <Box pad="xsmall"  >
+          <Box pad="xsmall" background="dark-1">
             <TextInput
               placeholder="email"
               name='email'
@@ -75,7 +79,7 @@ console.log(baby)
               onChange={ handleOnChange }
             />
           </Box>
-          <Box pad="xsmall"  >
+          <Box pad="xsmall" background="dark-1">
             <TextInput
               placeholder="username"
               name='username'
@@ -83,7 +87,7 @@ console.log(baby)
               onChange={ handleOnChange }
             />
           </Box>
-          <Box pad="xsmall"  >
+          <Box pad="xsmall" background="dark-1">
             <TextInput
               placeholder="password"
               name='password'
@@ -92,8 +96,8 @@ console.log(baby)
               onChange={ handleOnChange }
             />
           </Box>
-          <Box alignSelf='center'>
-            <Text size='medium' color='brand' margin='small' alignSelf='center'>Are you:
+          <Box alignSelf='center' background="dark-1">
+            <Text size='medium' color='accent-3' margin='small' alignSelf='center'>Are you:
             <RadioButtonGroup
               margin='medium'
               name='role'
@@ -104,8 +108,8 @@ console.log(baby)
             </Text>
           </Box>
           { user.role === 'expecting' ?
-          <Box>
-            <Text color='brand'>Add a baby:</Text>
+          <Box background="dark-1">
+            <Text color='accent-3'>Add a baby:</Text>
             <TextInput
               placeholder="nickname"
               name='nickname'
@@ -117,8 +121,8 @@ console.log(baby)
           :
           user.role === 'invited' ?
           <div>
-            <Box pad="xsmall" >
-              <Text color='brand'>Enter invite code:</Text>
+            <Box pad="xsmall" background="dark-1">
+              <Text color='accent-3'>Enter invite code:</Text>
               <TextInput
                 placeholder="invite code"
                 name='invite_code'
@@ -126,7 +130,7 @@ console.log(baby)
                 onChange={ handleInvite }
               />
             </Box>
-            <Box pad="xsmall" >
+            <Box pad="xsmall" background="dark-1">
               <TextInput
                 placeholder="relationship"
                 name='relationship'
@@ -138,7 +142,7 @@ console.log(baby)
           :
           null
           }
-          <Box pad="small" align="center">
+          <Box pad="small" align="center" background="dark-1">
             <Button  pad="medium" type='submit' primary label='Submit' onClick={handleSubmit} />
           </Box>
         </Form>

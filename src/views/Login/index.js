@@ -17,7 +17,7 @@ const Login = () => {
       <LoginForm onSubmit={ handleLogin } />
       <Box alignSelf='center'>
         <Text size='small' color='brand' margin='small'>New to Anything But Bob?
-        Create an account <NavLink to='/signup'>here.</NavLink></Text>
+        Create an account <NavLink style={{ color: '#6FFFB0' }} to='/signup'>here.</NavLink></Text>
       </Box>
     </Main>
   )

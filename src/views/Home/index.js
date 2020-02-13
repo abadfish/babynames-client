@@ -10,7 +10,7 @@ const Home = (props) => {
       { props.currentUser.role === 'expecting' ?
         <ParentHome user={ props.currentUser }/>
         :
-        <RelativeHome />
+        <RelativeHome user={ props.currentUser }/>
       }
     </div>
   )

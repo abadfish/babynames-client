@@ -25,6 +25,7 @@ const Names = (props) => {
   const changeView = s => {
     setView(s)
   }
+  const filteredNames = names ? names.filter(n => n.status !== 'pending') : []
 
   return (
     <Box elevation="large">
@@ -33,7 +34,7 @@ const Names = (props) => {
           <Heading alignSelf='center' color='#fff' level='4'>What are we going to name this kid??</Heading>
         </Box>
         { names ?
-          <NameTable names={ names } babyId={ props.baby.id } />
+          <NameTable names={ props.user.role === 'expecting' ? names : filteredNames } babyId={ props.baby.id } />
           :
           null
         }

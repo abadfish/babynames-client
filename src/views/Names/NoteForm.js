@@ -1,13 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Form, Button, TextArea, Box, Heading, Text } from 'grommet'
 
 const NoteForm = (props) => {
-  // const [ babyName, setName ] = useState({
-  //   status: props.name.status,
-  //   notes: '',
-  //   id: props.name.id,
-  // })
-  // console.log(babyName)
 
   const handleOnChange = e => {
     props.setName({ ...props.name, notes: e.target.value })
@@ -16,7 +10,6 @@ const NoteForm = (props) => {
   const handleSubmit = () => {
     props.onSubmit()
   }
-
 
   return (
     <div>
@@ -39,7 +32,6 @@ const NoteForm = (props) => {
       </Box>
     </div>
   )
-
 }
 
 export default NoteForm

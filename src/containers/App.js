@@ -5,13 +5,13 @@ import { Grommet } from 'grommet'
 import './App.css';
 // import { StateContext, DispatchContext } from '../state/context'
 import { authenticate, authenticationFailure, logout } from '../state/Auth/actions';
-// import Navbar from '../components/Navbar';
 import MatchAuthenticated from '../components/MatchAuthenticated';
 import RedirectUnauthenticated from '../components/RedirectUnauthenticated';
 import Navbar from '../components/Navbar'
 import Login from '../views/Login'
 import Signup from '../views/Login/Signup'
 import Home from '../views/Home'
+import Profile from '../views/Users/Profile'
 
 // import Baby from '../views/Babies/Baby'
 
@@ -57,10 +57,10 @@ class App extends Component {
     return (
       <Router>
         <Grommet theme={ theme }>
-
+          <Navbar isAuthenticated={isAuthenticated} logout={logout} />
           <Switch>
             <MatchAuthenticated path='/' exact component={ Home } {...authProps} />
-
+            <MatchAuthenticated path='/profile' exact component={ Profile } {...authProps} />
             <RedirectUnauthenticated path='/login' exact component={ Login } { ...authProps } />
             <RedirectUnauthenticated path='/signup' exact component={ Signup } { ...authProps } />
           </Switch>

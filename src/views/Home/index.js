@@ -1,9 +1,17 @@
 import React from 'react'
+import ParentHome from './ParentHome'
+import RelativeHome from './RelativeHome'
 
-const Home = () => {
+const Home = (props) => {
+  // console.log(props)
+
   return (
-    <div>
-      <span>Hello World</span>
+    <div className='home-styles'>
+      { props.currentUser.role === 'expecting' ?
+        <ParentHome user={ props.currentUser }/>
+        :
+        <RelativeHome />
+      }
     </div>
   )
 }

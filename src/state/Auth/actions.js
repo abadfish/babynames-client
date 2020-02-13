@@ -17,10 +17,16 @@ export const authenticationFailure = () => {
   return { type: 'AUTHENTICATION_FAILURE' };
 }
 
-export const logout = (routerHistory) => {
+export const logout = () => {
   localStorage.removeItem('token');
-  routerHistory.replace('./login');
   return { type: 'LOGOUT' };
+}
+
+export const replaceUser = user => {
+  return {
+    type: 'REPLACE_USER',
+    user
+  }
 }
 
 export const headers = () => {
@@ -39,13 +45,11 @@ export const signup = (user) => {
     dispatch(authenticationRequest())
     AuthService.signup(user)
     .then(body => {
-      // const slug = body.user.email.split("@")[0];
       console.log(body)
       console.log(body.token)
       console.log(body.user)
       localStorage.setItem('token', body.token);
       dispatch(setCurrentUser(body.user));
-      // router.history.replace(`/users/${slug}/profile`);
     })
     .catch(err => {
       console.log(err)
@@ -53,8 +57,7 @@ export const signup = (user) => {
   }
 }
 
-export const login = (user, router) => {
-  console.log(user)
+export const login = (user) => {
   return dispatch => {
     dispatch(authenticationRequest());
     AuthService.login(user)
@@ -63,9 +66,7 @@ export const login = (user, router) => {
         console.log(body.token)
         console.log(body.user)
         localStorage.setItem('token', body.token);
-        // localStorage.setItem('user', body.user);
         dispatch(setCurrentUser(body.user))
-        // router.history.replace('/products');
       })
       .catch((err) => {
         console.log(err)
@@ -73,20 +74,45 @@ export const login = (user, router) => {
   }
 }
 
-export const authenticate = (token) => {
+export const authenticate = () => {
   return dispatch => {
     dispatch(authenticationRequest());
-      AuthService.authenticate(token)
-      .then(response => {
-        console.log(response)
-        localStorage.setItem('token', response.token);
-        // localStorage.setItem('user', response.user);
-        dispatch(setCurrentUser(response.user))
+      AuthService.authenticate()
+      .then(body => {
+        console.log(body)
+        localStorage.setItem('token', body.token);
+        dispatch(setCurrentUser(body.user))
       })
       .catch(err => {
         console.log(err)
         localStorage.removeItem('token');
         window.location = '/login';
       });
+  }
+}
+
+export const updateNameRating = (user, name) => {
+  return dispatch => {
+    AuthService.updateRating(user, name)
+    .then(user => {
+      console.log(user)
+      dispatch(replaceUser(user))
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }
+}
+
+export const createNameRating = (user, name) => {
+  return dispatch => {
+    AuthService.rate(user, name)
+    .then(user => {
+      console.log(user)
+      dispatch(replaceUser(user))
+    })
+    .catch((err) => {
+      console.log(err)
+    })
   }
 }

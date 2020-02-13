@@ -1,0 +1,59 @@
+/* CSS FOR TABLE CREATION BY HAND */
+.table-container {
+  width: 100%;
+  font-family: 'Fira Mono', monospace;
+}
+.table-row {
+  display: inline-grid;
+  grid-template-columns: repeat(5, 20% [col-start]);
+  border-bottom: 1px solid #81FCED;
+  height: 60px;
+  width: 100%;
+}
+#heading {
+  font-family: 'Fira Mono', monospace;
+}
+.table-cell {
+  /*border: 1px solid #000;*/
+  /*background: #d3d3d3;*/
+  /*height: 100px;*/
+  text-align: center;
+  /*padding: 10%;*/
+  line-height: 60px;
+}
+
+.name {
+  color: #6FFFB0;
+  font-weight: 600;
+}
+.note-name {
+  background: #282a2e;
+  padding: 3px;
+  border-radius: 3px;
+}
+.notes {
+  font-size: 12px;
+  overflow-wrap: break-word;
+  overflow: scroll;
+  line-height: 18px;
+  padding-top: 5px;
+}
+.vote-button {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+.vote-button#down {
+  padding-top: 1rem;
+}
+
+.selector {
+  background: #282a2e;
+  color: #f3f3f3;
+  font-size: 16px;
+  height: 37px;
+  width: 150px;
+  font-family: 'Fira Mono', monospace;
+}
+.note-button {
+  height: 100%;
+}

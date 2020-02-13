@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
-import { reduxForm } from 'redux-form'
-import { Form, FormField, Button, TextInput, Box } from 'grommet'
+import { Form, Button, TextInput, Box } from 'grommet'
 
 const LoginForm = (props) => {
-  console.log(props)
 
   const [ user, setUser ] = useState({
     userName: '',
@@ -14,16 +12,14 @@ const LoginForm = (props) => {
     const { name, value } = e.target
     setUser({ ...user, [name]: value })
   }
-  console.log(user)
   const handleSubmit = () => {
-    console.log(user)
     props.onSubmit(user)
   }
   return (
     <div>
       <Box align="center" >
         <Form>
-          <Box pad="xsmall"  >
+          <Box pad="xsmall" background="dark-1" >
             <TextInput
               placeholder="username"
               name='userName'
@@ -31,10 +27,11 @@ const LoginForm = (props) => {
               onChange={ handleOnChange }
             />
           </Box>
-          <Box pad="xsmall"  >
+          <Box pad="xsmall" background="dark-1">
             <TextInput
               placeholder="password"
               name='password'
+              type='password'
               value={ user.password }
               onChange={ handleOnChange }
             />

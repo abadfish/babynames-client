@@ -1,13 +1,5 @@
 import { API_URL, HEADERS } from '../constants'
 
-export const headers = () => {
-  const token = localStorage.getItem('token');
-  return {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer: ${token}`,
-  }
-}
 
 const AuthService = {
 
@@ -32,11 +24,42 @@ const AuthService = {
   authenticate() {
     return fetch(`${API_URL}/auth/refresh`, {
         method: 'POST',
-        headers: HEADERS,
+        headers: HEADERS(),
       })
       .then(response => response.json())
   },
 
+  rate(user, name) {
+    return fetch(`${API_URL}/users/${user.id}/user_name_votes`, {
+      method: 'POST',
+      headers: HEADERS(),
+      body: JSON.stringify({ name })
+    })
+    .then(response => response.json())
+  },
+
+  updateRating(user, name) {
+    return fetch(`${API_URL}/users/${user.id}/user_name_votes/${name.id}`, {
+      method: 'PUT',
+      headers: HEADERS(),
+      body: JSON.stringify({ user, name })
+    })
+    .then(response => response.json())
+  },
+
+
 }
 
 export default AuthService
+
+
+// MOVED TO CONSTANTS.JS
+// export const headers = () => {
+//   const token = localStorage.getItem('token');
+//   console.log(token)
+//   return {
+//     'Accept': 'application/json',
+//     'Content-Type': 'application/json',
+//     'Authorization': `Bearer: ${token}`,
+//   }
+// }

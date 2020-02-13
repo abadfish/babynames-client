@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react'
 import { useDispatch } from 'react-redux'
-import { NavLink } from 'react-router-dom'
-import { Main, Heading, Box, Text } from 'grommet'
+import { Main, Heading } from 'grommet'
 import { signup } from '../../state/Auth/actions';
 import SignupForm from './SignupForm'
 

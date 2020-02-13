@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import { reduxForm } from 'redux-form'
-import { Form, FormField, Button, TextInput, Box, Text, RadioButtonGroup } from 'grommet'
+import { Form, Button, TextInput, Box, Text, RadioButtonGroup } from 'grommet'
 
 const SignupForm = (props) => {
 
@@ -33,11 +32,16 @@ console.log(baby)
     setUser({ ...user, role: e.target.value })
   }
 
+  const handleAddBaby = e => {
+    setUser({
+      ...user,
+      userBaby: baby,
+      relationship: 'parent'
+    })
+  }
+
   const handleSetNickname = e => {
     setBaby({ ...baby, nickname: e.target.value })
-    setUser({ ...user, relationship: 'parent' })
-    setUser({ ...user, userBaby: baby })
-
   }
   const handleInvite = e => {
     setBaby({ ...baby, invite_code: e.target.value })
@@ -83,6 +87,7 @@ console.log(baby)
             <TextInput
               placeholder="password"
               name='password'
+              type='password'
               value={ user.password }
               onChange={ handleOnChange }
             />
@@ -107,6 +112,7 @@ console.log(baby)
               value={ baby.nickname }
               onChange={ handleSetNickname }
             />
+            <Button pad="xsmall" primary label='Add Baby' onClick={ handleAddBaby } />
           </Box>
           :
           user.role === 'invited' ?

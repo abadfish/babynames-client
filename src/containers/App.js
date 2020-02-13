@@ -8,9 +8,11 @@ import { authenticate, authenticationFailure, logout } from '../state/Auth/actio
 // import Navbar from '../components/Navbar';
 import MatchAuthenticated from '../components/MatchAuthenticated';
 import RedirectUnauthenticated from '../components/RedirectUnauthenticated';
+import Navbar from '../components/Navbar'
 import Login from '../views/Login'
 import Signup from '../views/Login/Signup'
 import Home from '../views/Home'
+
 // import Baby from '../views/Babies/Baby'
 
 const theme = {
@@ -38,28 +40,29 @@ class App extends Component {
 
   componentDidMount() {
     const token = localStorage.getItem('token');
-      if (token !== '' && token !== 'undefined') {
+      if (token) {
         console.log('Fetching a new token!');
+      // if (token !== '' && token !== 'undefined') {
+      //   console.log('Fetching a new token!');
         this.props.authenticate();
       } else {
         this.props.authenticationFailure();
       }
   }
+  // Goes on line 59 <Navbar isAuthenticated={isAuthenticated} logout={logout} />
 
   render() {
     const { currentUser, isAuthenticated, isAuthenticating, logout } = this.props;
     const authProps = { isAuthenticated, isAuthenticating, currentUser };
-
     return (
       <Router>
         <Grommet theme={ theme }>
 
-
           <Switch>
-            <MatchAuthenticated path='/' exact component={Home} {...authProps} />
+            <MatchAuthenticated path='/' exact component={ Home } {...authProps} />
 
-            <RedirectUnauthenticated path='/login' exact component={Login} {...authProps} />
-            <RedirectUnauthenticated path='/signup' exact component={ Signup } {...authProps} />
+            <RedirectUnauthenticated path='/login' exact component={ Login } { ...authProps } />
+            <RedirectUnauthenticated path='/signup' exact component={ Signup } { ...authProps } />
           </Switch>
         </Grommet>
       </Router>
@@ -67,6 +70,8 @@ class App extends Component {
   }
 
 }
+// <Route path='/' exact component={ Home } />
+
 
 export default connect(
   state => ({

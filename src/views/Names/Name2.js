@@ -85,8 +85,6 @@ const Name = (props) => {
   const rate = (vote, increment) => {
     let change = 0
     increment === 1 ? change = 1 : change = 2
-    console.log(change)
-    debugger
     vote === 'upvote' ?
       setName({
         ...name,

@@ -26,6 +26,14 @@ export default (state = initialState, action) => {
     case 'LOGOUT':
       return Object.assign({}, initialState, { isAuthenticating: false });
 
+    case 'REPLACE_USER':
+      return {
+        isAuthenticated: true,
+        isAuthenticating: false,
+        currentUser: action.user
+      }
+
+
     default:
       return state;
   }

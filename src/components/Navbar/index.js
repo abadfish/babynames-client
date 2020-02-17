@@ -3,7 +3,7 @@ import { Header, Button, Box, Anchor } from 'grommet'
 import '../../index.css'
 
 const Navbar = (props) => {
-  console.log(props)
+
   return (
     <Header background='brand' pad='small'>
       <Button className='nav-logo'>Anything But Bob</Button>
@@ -19,7 +19,6 @@ const Navbar = (props) => {
           <Anchor label='Login' href='/login' />
         </Box>
       }
-      
     </Header>
   )
 }

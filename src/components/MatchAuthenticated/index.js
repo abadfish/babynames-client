@@ -4,7 +4,7 @@ import { Route, Redirect } from 'react-router-dom';
 
 
 const MatchAuthenticated = (props) => {
-  console.log(props)
+  // console.log(props)
   const Component = props.component
   return(
     <Route

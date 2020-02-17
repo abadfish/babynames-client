@@ -1,5 +1,4 @@
 import AuthService from '../../services/AuthService'
-import { API_URL } from '../../constants'
 export const authenticationRequest = () => {
   return {
     type: 'AUTHENTICATION_REQUEST'
@@ -79,7 +78,7 @@ export const authenticate = () => {
     dispatch(authenticationRequest());
       AuthService.authenticate()
       .then(body => {
-        console.log(body)
+        // console.log(body)
         localStorage.setItem('token', body.token);
         dispatch(setCurrentUser(body.user))
       })

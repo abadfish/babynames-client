@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Main, Heading, Header, Box, Text, Button, Layer } from 'grommet'
-import { Home, Add } from 'grommet-icons'
+import { Main, Heading, Box, Button, Layer } from 'grommet'
+import { Add } from 'grommet-icons'
 import Names from '../Names'
 import NameForm from '../Names/NameForm'
 import { fetchBaby } from '../../state/Babies/actions'
@@ -9,7 +9,7 @@ import { createName } from '../../state/Names/actions'
 
 
 const RelativeHome = (props) => {
-  const user = props.user
+
   const dispatch = useDispatch()
   const baby = useSelector(state => state.babies.baby || {} )
   const [ showForm, setShowForm ] = useState(false)
@@ -24,9 +24,9 @@ const RelativeHome = (props) => {
   })
 
   return (
-    <Main pad="medium">
-      <Heading alignSelf='center' level='2'>
-        Hi { user.name }!
+    <Main pad="medium" style={{ marginBottom: '2rem'}}>
+      <Heading alignSelf='center' level='2' margin='small'>
+        Hi { props.user.name }!
       </Heading>
       <Box
         alignSelf='center'
@@ -38,7 +38,7 @@ const RelativeHome = (props) => {
         <Button
           style={{ color: '#f3f3f3'}}
           label='Add Name'
-          icon={ <Add /> }
+          icon={ <Add color='accent-3'/> }
           onClick={ () => setShowForm(true) }>
         </Button>
       </Box>
@@ -56,7 +56,7 @@ const RelativeHome = (props) => {
           </Box>
         </Layer>
       )}
-      <Names baby={ baby } user={ user }/>
+      <Names baby={ baby } user={ props.user }/>
     </Main>
   )
 }

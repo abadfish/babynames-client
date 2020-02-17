@@ -43,13 +43,12 @@ const Name = (props) => {
   })
   // END API CALLS
 
-  const handleUpvote = () => {
-    setNameRecord({ ...nameRecord, vote: 'upvote' })
+  const handleVoting = (vote) => {
+    rateName(vote)
   }
-  const handleDownvote = () => {
-    setNameRecord({ ...nameRecord, vote: 'downvote' })
+  const rateName = (vote) => {
+    setNameRecord({ ...nameRecord, vote: vote })
   }
-
   useEffect(() => {
     if (nameRecord.vote !== '') {
       reconcileUser(nameRecord.vote, nameRecord.name.id)
@@ -84,7 +83,7 @@ const Name = (props) => {
   }
 
   const rate = (vote, increment) => {
-    let change
+    let change = 0
     increment === 1 ? change = 1 : change = 2
     console.log(change)
     debugger
@@ -148,7 +147,6 @@ const Name = (props) => {
             <option value='contender'>contender</option>
             <option value='finalist'>finalist</option>
             <option value='rejected'>rejected</option>
-            <option value='rejected'>winner</option>
           </select>
         </div>
         :
@@ -158,10 +156,10 @@ const Name = (props) => {
       <div className='table-cell'>
         <Button
           className='vote-button'
-          onClick={ handleUpvote } icon={ <Like color='accent-4' size='medium'/> } />
+          onClick={ () => handleVoting('upvote', n.id) } icon={ <Like color='accent-4' size='medium'/> } />
           { n.rating }
         <Button
-          className='vote-button' id='down' onClick={ handleDownvote } icon={ <Dislike color='status-critical' size='medium'/> } />
+          className='vote-button' id='down' onClick={ () => handleVoting('downvote', n.id) } icon={ <Dislike color='status-critical' size='medium'/> } />
       </div>
       <div className='table-cell'>{ n.votes }</div>
 

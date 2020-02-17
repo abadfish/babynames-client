@@ -17,6 +17,7 @@ export const fetchBaby = (babyId) => {
     BabiesService.fetchBaby(babyId)
     .then(baby => {
       dispatch(setBaby(baby))
+      dispatch(finishFetchRequest())
     })
   }
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Heading, Box } from 'grommet'
+import { Heading, Box, Text } from 'grommet'
 import NameTable from './NameTable'
 
 const Names = (props) => {
@@ -11,21 +11,29 @@ const Names = (props) => {
   return (
     <Box elevation="large">
       <Box>
-        <Box background='brand'>
-          <Heading
+        <Box background='brand' pad='small'>
+          <Text
+            size='large'
             alignSelf='center'
             color='#fff'
-            level='4'>
-              What are we going to name this kid??
-          </Heading>
+            weight='bold'
+          >What are we going to name this kid?
+          </Text>
         </Box>
-        { names ?
+        { names && names.length > 0 ?
           <NameTable
             names={ props.user.role === 'expecting' ? names : filteredNames }
             babyId={ props.baby.id }
           />
           :
-          null
+          <Text
+            alignSelf='center'
+            color='accent-3'
+            weight='bold'
+            size='large'
+            margin='medium'
+          >Start suggesting!
+          </Text>
         }
       </Box>
     </Box>

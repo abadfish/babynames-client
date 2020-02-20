@@ -1,4 +1,11 @@
 import AuthService from '../../services/AuthService'
+
+import {
+  makeFetchRequest,
+  finishFetchRequest,
+  unsuccessfulFetchRequest
+} from '../appTransactions'
+
 export const authenticationRequest = () => {
   return {
     type: 'AUTHENTICATION_REQUEST'
@@ -41,6 +48,7 @@ export const headers = () => {
 
 export const signup = (user) => {
   return dispatch => {
+    dispatch(makeFetchRequest())
     dispatch(authenticationRequest())
     AuthService.signup(user)
     .then(body => {
@@ -49,6 +57,7 @@ export const signup = (user) => {
       console.log(body.user)
       localStorage.setItem('token', body.token);
       dispatch(setCurrentUser(body.user));
+      dispatch(finishFetchRequest())
     })
     .catch(err => {
       console.log(err)
@@ -58,6 +67,7 @@ export const signup = (user) => {
 
 export const login = (user) => {
   return dispatch => {
+    dispatch(makeFetchRequest())
     dispatch(authenticationRequest());
     AuthService.login(user)
       .then(body => {
@@ -66,6 +76,7 @@ export const login = (user) => {
         console.log(body.user)
         localStorage.setItem('token', body.token);
         dispatch(setCurrentUser(body.user))
+        dispatch(finishFetchRequest())
       })
       .catch((err) => {
         console.log(err)
@@ -92,10 +103,12 @@ export const authenticate = () => {
 
 export const updateNameRating = (user, name) => {
   return dispatch => {
+    dispatch(makeFetchRequest())
     AuthService.updateRating(user, name)
     .then(user => {
       console.log(user)
       dispatch(replaceUser(user))
+      dispatch(finishFetchRequest())
     })
     .catch((err) => {
       console.log(err)

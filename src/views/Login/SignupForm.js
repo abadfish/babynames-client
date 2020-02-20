@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Form, Button, TextInput, Box, Text, RadioButtonGroup } from 'grommet'
+import { Form, Button, TextInput, Box, Text, RadioButtonGroup, Calendar } from 'grommet'
 
 const SignupForm = (props) => {
 
@@ -18,10 +18,11 @@ const SignupForm = (props) => {
     relationship: '',
     userBaby: {},
   })
-console.log(user)
-console.log(baby)
-  // const [ babyForm, openBabyForm ] = useState(false)
+  console.log(user)
+  console.log(baby)
+  const [ isBabyFormOpen, setIsBabyFormOpen ] = useState(false)
   // const [ babyChooser, openBabyChooser ] = useState(false)
+  const [isUserComplete, setIsUserComplete] = useState(false)
 
   const handleOnChange = e => {
     const { name, value } = e.target
@@ -29,27 +30,33 @@ console.log(baby)
   }
 
   const handleSetRole = e => {
+    setIsBabyFormOpen(true)
     setUser({ ...user, role: e.target.value })
   }
 
   const handleAddBaby = e => {
+    setIsBabyFormOpen(false)
     setUser({
       ...user,
       userBaby: baby,
     })
+    setIsUserComplete(true)
   }
 
   const handleSetNickname = e => {
     setBaby({ ...baby, nickname: e.target.value })
   }
+  const handleSetDueDate = e => {
+    setBaby({ ...baby, due_date: e })
+  }
   const handleInvite = e => {
     setBaby({ ...baby, invite_code: e.target.value })
   }
-  useEffect(() => {
-    if (baby.invite_code !== '') {
-      handleAddBaby()
-    }
-  },[baby.invite_code])
+  // useEffect(() => {
+  //   if (baby.invite_code !== '') {
+  //     handleAddBaby()
+  //   }
+  // },[baby.invite_code])
 
   const handleSetRelationship = e => {
     setUser({ ...user, relationship: e.target.value })
@@ -63,7 +70,7 @@ console.log(baby)
   return (
     <div className='form-sizer'>
         <Form>
-          <Box pad="xsmall" background="dark-1">
+          <Box pad="xsmall" background="#282a2e">
             <TextInput
               placeholder="name"
               name='name'
@@ -71,7 +78,7 @@ console.log(baby)
               onChange={ handleOnChange }
             />
           </Box>
-          <Box pad="xsmall" background="dark-1">
+          <Box pad="xsmall" background="#282a2e">
             <TextInput
               placeholder="email"
               name='email'
@@ -79,7 +86,7 @@ console.log(baby)
               onChange={ handleOnChange }
             />
           </Box>
-          <Box pad="xsmall" background="dark-1">
+          <Box pad="xsmall" background="#282a2e">
             <TextInput
               placeholder="username"
               name='username'
@@ -87,7 +94,7 @@ console.log(baby)
               onChange={ handleOnChange }
             />
           </Box>
-          <Box pad="xsmall" background="dark-1">
+          <Box pad="xsmall" background="#282a2e">
             <TextInput
               placeholder="password"
               name='password'
@@ -96,10 +103,10 @@ console.log(baby)
               onChange={ handleOnChange }
             />
           </Box>
-          <Box alignSelf='center' background="dark-1">
-            <Text size='medium' color='accent-3' margin='small' alignSelf='center'>Are you:
+          <Box alignSelf='center' background="#282a2e">
+            <Text size='medium' color='accent-3' margin='small' alignSelf='center' weight='bold'>Are you:
             <RadioButtonGroup
-              margin='medium'
+              margin='small'
               name='role'
               options={['expecting', 'invited']}
               value={ user.role }
@@ -107,21 +114,29 @@ console.log(baby)
             />
             </Text>
           </Box>
-          { user.role === 'expecting' ?
-          <Box background="dark-1">
-            <Text color='accent-3'>Add a baby:</Text>
+          { user.role === 'expecting' && isBabyFormOpen ?
+          <Box background="#282a2e" style={{ textAlign: 'center'}}>
+            <Text alignSelf='center' color='accent-3' weight='bold'>Add a baby:</Text>
             <TextInput
+              style={{ margin: '15px'}}
               placeholder="nickname"
               name='nickname'
               value={ baby.nickname }
               onChange={ handleSetNickname }
             />
-            <Button pad="xsmall" primary label='Add Baby' onClick={ handleAddBaby } />
+            <Text color='accent-3' weight='bold'>Due Date: </Text>
+            <Calendar
+              alignSelf='center'
+              size="medium"
+              date={(new Date()).toISOString()}
+              onSelect={(date) => {handleSetDueDate(date)}}
+            />
+            <Button border='brand' margin='small' pad="xsmall" primary label='Add Baby' onClick={ handleAddBaby } />
           </Box>
           :
-          user.role === 'invited' ?
+          user.role === 'invited' && isBabyFormOpen ?
           <div>
-            <Box pad="xsmall" background="dark-1">
+            <Box pad="xsmall" background="#282a2e">
               <Text color='accent-3'>Enter invite code:</Text>
               <TextInput
                 placeholder="invite code"
@@ -130,7 +145,7 @@ console.log(baby)
                 onChange={ handleInvite }
               />
             </Box>
-            <Box pad="xsmall" background="dark-1">
+            <Box pad="xsmall" background="#282a2e">
               <TextInput
                 placeholder="relationship"
                 name='relationship'
@@ -138,12 +153,21 @@ console.log(baby)
                 onChange={ handleSetRelationship }
               />
             </Box>
+            <Button pad="xsmall" primary label='Add Baby' onClick={ handleAddBaby } />
           </div>
+          :
+          user.userBaby !== {} && user.role !== '' && !isBabyFormOpen ?
+          <Text alignSelf='center' color='accent-3' weight='bold'>Baby added!</Text>
           :
           null
           }
-          <Box pad="small" align="center" background="dark-1">
-            <Button  pad="medium" type='submit' primary label='Submit' onClick={handleSubmit} />
+          <Box pad="small" align="center" background="#282a2e">
+            { isUserComplete ?
+              <Button pad="medium" type='submit' primary color='brand' label='Submit' onClick={handleSubmit} />
+              :
+              <Button  disabled={true} pad="medium" type='submit' primary color='brand' label='Submit' onClick={handleSubmit} />
+            }
+
           </Box>
         </Form>
     </div>

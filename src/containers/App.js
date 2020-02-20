@@ -12,6 +12,7 @@ import Login from '../views/Login'
 import Signup from '../views/Login/Signup'
 import Home from '../views/Home'
 import Profile from '../views/Users/Profile'
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
 
 // import Baby from '../views/Babies/Baby'
 

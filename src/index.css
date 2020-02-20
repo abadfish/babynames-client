@@ -47,3 +47,17 @@ code {
   font-size: 32px !important;
   color: #6FFFB0 !important;
 }
+.profile {
+  display: inline-grid;
+  grid-template-columns: repeat(2, 50% [col-start]);
+  border-bottom: 1px solid #81FCED;
+}
+.user {
+  width: 45%;
+}
+.info {
+  width: 55%;
+}
+.edit {
+  width: 10%;
+}

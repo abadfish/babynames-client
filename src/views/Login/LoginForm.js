@@ -19,7 +19,7 @@ const LoginForm = (props) => {
     <div>
       <Box align="center" >
         <Form>
-          <Box pad="xsmall" background="dark-1" >
+          <Box pad="xsmall" background="#282a2e">
             <TextInput
               placeholder="username"
               name='userName'
@@ -27,7 +27,7 @@ const LoginForm = (props) => {
               onChange={ handleOnChange }
             />
           </Box>
-          <Box pad="xsmall" background="dark-1">
+          <Box pad="xsmall" background="#282a2e">
             <TextInput
               placeholder="password"
               name='password'

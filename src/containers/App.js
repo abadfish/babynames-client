@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { Grommet, Footer, Text } from 'grommet'
+import { Grommet, Footer, Text, Box } from 'grommet'
 import './App.css';
 // import { StateContext, DispatchContext } from '../state/context'
 import { authenticate, authenticationFailure, logout } from '../state/Auth/actions';
@@ -62,12 +62,14 @@ class App extends Component {
             <RedirectUnauthenticated path='/login' exact component={ Login } { ...authProps } />
             <RedirectUnauthenticated path='/signup' exact component={ Signup } { ...authProps } />
           </Switch>
-          <Footer background="#fff" pad="medium">
-            <Text>This app is currently in beta. Please email kirsten.ofarrell@gmail.com if you have any issues.</Text>
-          </Footer>
-          <Footer background="brand" pad="medium">
-            <Text>Copyright {'\u00A9'} 2020 Tenlie.tech</Text>
-          </Footer>
+          <Box style={{ bottom: '0', position: 'relative', width: '100%'}}>
+            <Footer background="#fff" pad="medium" >
+              <Text>This app is currently in beta. Please email kirsten.ofarrell@gmail.com if you have any issues.</Text>
+            </Footer>
+            <Footer background="brand" pad="medium" >
+              <Text>Copyright {'\u00A9'} 2020 Tenlie.tech</Text>
+            </Footer>
+          </Box>
         </Grommet>
       </Router>
     );

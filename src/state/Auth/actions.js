@@ -55,12 +55,20 @@ export const signup = (user) => {
     dispatch(authenticationRequest())
     AuthService.signup(user)
     .then(body => {
-      console.log(body)
-      console.log(body.token)
-      console.log(body.user)
-      localStorage.setItem('token', body.token);
-      dispatch(setCurrentUser(body.user));
-      dispatch(finishFetchRequest())
+      if (body.errors) {
+        dispatch(authenticationFailure(body.errors))
+        dispatch(finishFetchRequest())
+      } else if (!body.errors && !body.user) {
+        dispatch(authenticationFailure(body.errors))
+        dispatch(finishFetchRequest())
+      } else {
+        console.log(body)
+        console.log(body.token)
+        console.log(body.user)
+        localStorage.setItem('token', body.token);
+        dispatch(setCurrentUser(body.user));
+        dispatch(finishFetchRequest())
+      }
     })
     .catch(err => {
       console.log(err)

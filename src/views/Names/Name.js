@@ -20,7 +20,6 @@ const Name = (props) => {
     name,
     vote: ''
   })
-  // console.log(currentUser)
 
   const [showNoteForm, setShowNoteForm] = useState(false)
 

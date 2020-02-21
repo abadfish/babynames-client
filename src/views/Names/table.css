@@ -54,6 +54,36 @@
   width: 150px;
   font-family: 'Fira Mono', monospace;
 }
+.selector-small {
+  background: #282a2e;
+  color: #f3f3f3;
+  font-size: 16px;
+  height: 30px;
+  width: 30px;
+  font-family: 'Fira Mono', monospace;
+}
 .note-button {
   height: 100%;
+}
+
+@media only screen and (max-width: 1029px) {
+  .selector {
+    background: #282a2e;
+    color: #f3f3f3;
+    font-size: 12px;
+    height: 30px;
+    width: 50px;
+    font-family: 'Fira Mono', monospace;
+  }
+  .table-row {
+    display: inline-grid;
+    grid-template-columns: 20% 15% 30% 10% 25%;
+    border-bottom: 1px solid #81FCED;
+    height: 60px;
+    width: 100%;
+  }
+  .vote-button {
+    padding-left: .5rem;
+    padding-right: .5rem;
+  }
 }

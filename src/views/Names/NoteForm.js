@@ -24,7 +24,6 @@ const NoteForm = (props) => {
               onChange={ handleOnChange }
             />
           </Box>
-
           <Box align="center">
             <Button  style={{ width: '100%', marginBottom: '5px' }} pad="medium" type='submit' color='neutral-2' primary label='Add' onClick={ handleSubmit } />
           </Box>

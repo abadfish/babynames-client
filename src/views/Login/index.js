@@ -10,6 +10,8 @@ const Login = () => {
   const dispatch = useDispatch()
   const makingRequestToApi = useSelector(state => state.appTransactions.makingRequestToAPI)
   console.log(makingRequestToApi)
+  const errors = useSelector(state => state.auth.errors)
+  console.log(errors)
   const handleLogin = useCallback((user) => {
     dispatch(login(user))
   })
@@ -29,8 +31,24 @@ const Login = () => {
         :
         <Box alignSelf='center'>
           <LoginForm onSubmit={ handleLogin } />
+          {
+            errors ?
+              errors.password ?
+              errors.password.map((e, i) => (
+                <Text key={i} color='status-error'>{e}</Text>
+              ))
+              :
+              errors.username ?
+              errors.username.map((e, i) => (
+                <Text key={i} color='status-error'>{e}</Text>
+              ))
+              :
+              null
+            :
+            null
+          }
           <Box alignSelf='center'>
-            <Text size='small' color='brand' margin='small'>New to Anything But Bob?
+            <Text color='brand' margin='small'>New to Anything But Bob?
             Create an account <NavLink style={{ color: '#6FFFB0' }} to='/signup'>here.</NavLink></Text>
           </Box>
         </Box>

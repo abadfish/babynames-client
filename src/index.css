@@ -48,6 +48,7 @@ code {
   color: #6FFFB0 !important;
 }
 .profile {
+  width: 100%;
   display: inline-grid;
   grid-template-columns: repeat(2, 50% [col-start]);
   border-bottom: 1px solid #81FCED;
@@ -57,6 +58,7 @@ code {
 }
 .info {
   width: 55%;
+  word-wrap: break-word;
 }
 .edit {
   width: 10%;

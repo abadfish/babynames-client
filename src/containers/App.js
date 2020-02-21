@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { Grommet } from 'grommet'
+import { Grommet, Footer, Text } from 'grommet'
 import './App.css';
 // import { StateContext, DispatchContext } from '../state/context'
 import { authenticate, authenticationFailure, logout } from '../state/Auth/actions';
@@ -43,18 +43,15 @@ class App extends Component {
     const token = localStorage.getItem('token');
       if (token) {
         console.log('Fetching a new token!');
-      // if (token !== '' && token !== 'undefined') {
-      //   console.log('Fetching a new token!');
         this.props.authenticate();
       } else {
         this.props.authenticationFailure();
       }
   }
-  // Goes on line 59 <Navbar isAuthenticated={isAuthenticated} logout={logout} />
 
   render() {
-    const { currentUser, isAuthenticated, isAuthenticating, logout } = this.props;
-    const authProps = { isAuthenticated, isAuthenticating, currentUser };
+    const { currentUser, isAuthenticated, isAuthenticating, logout, errors } = this.props;
+    const authProps = { isAuthenticated, isAuthenticating, currentUser, errors };
     return (
       <Router>
         <Grommet theme={ theme }>
@@ -65,14 +62,17 @@ class App extends Component {
             <RedirectUnauthenticated path='/login' exact component={ Login } { ...authProps } />
             <RedirectUnauthenticated path='/signup' exact component={ Signup } { ...authProps } />
           </Switch>
+          <Footer background="#fff" pad="medium">
+            <Text>This app is currently in beta. Please email kirsten.ofarrell@gmail.com if you have any issues.</Text>
+          </Footer>
+          <Footer background="brand" pad="medium">
+            <Text>Copyright {'\u00A9'} 2020 Tenlie.tech</Text>
+          </Footer>
         </Grommet>
       </Router>
     );
   }
-
 }
-// <Route path='/' exact component={ Home } />
-
 
 export default connect(
   state => ({

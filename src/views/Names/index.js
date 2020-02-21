@@ -1,23 +1,36 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Heading, Box, Text } from 'grommet'
 import NameTable from './NameTable'
 
 const Names = (props) => {
 
   const names = props.baby.names
-
   const filteredNames = names ? names.filter(n => n.status !== 'pending' || n.status !== 'rejected') : []
+  const [daysLeft, setDaysLeft] = useState(0)
 
+  useEffect(() => {
+    if (props.baby.due_date !== undefined) {
+      setDaysLeft((new Date(props.baby.due_date).getTime() - new Date().getTime()) / (1000 * 3600 * 24))
+    }
+  }, [props.baby.due_date])
   return (
     <Box elevation="large">
       <Box>
-        <Box background='brand' pad='small'>
+        <Box background='brand' pad='medium'>
           <Text
-            size='large'
+            size='medium'
             alignSelf='center'
             color='#fff'
             weight='bold'
           >What are we going to name this kid?
+          </Text>
+          <Text
+            size='medium'
+            alignSelf='center'
+            color='accent-3'
+            weight='bold'
+          >
+          { parseInt((daysLeft))} Days Left to decide...
           </Text>
         </Box>
         { names && names.length > 0 ?

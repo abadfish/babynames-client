@@ -8,6 +8,7 @@ const Profile = (props) => {
   console.log(props.currentUser)
   const user = props.currentUser
   const baby = props.currentUser.babies[0]
+  debugger
   // const [editUser, setEditUser] = useState(false)
   // const [editEmail, setEditEmail] = useState(false)
   // const [editRelation, setEditRelation] = useState(false)
@@ -15,9 +16,14 @@ const Profile = (props) => {
   // useEffect(() => {
   //   dispatch()
   // })
+  const voters = baby ? baby.users.map((u, i) => (
+    <div key={i}>
+      <Text>{u.name}</Text><br />
+    </div>
+  )) : null
 
   return (
-    <Main>
+    <Main margin={{ 'bottom': 'medium'}}>
       <Heading
         alignSelf='center'
         color='accent-1'
@@ -25,39 +31,48 @@ const Profile = (props) => {
       >What's good, {user.name}?
       </Heading>
       <Box
-
         alignSelf='center'
-        pad="medium"
+        pad={{"horizontal": "medium"}}
         round={true}
-        background='brand'>
-        <Heading level={3} color='accent-1'>Personal Info</Heading>
-        <Box direction='row' className='profile'>
-
-          <Box pad="medium" className='user'>
-            <Text color='accent-3' margin={{'bottom': 'small'}}>username: </Text>
-            <Text color='accent-3' margin={{'bottom': 'small'}}>email:</Text>
-            <Text color='accent-3' margin={{'bottom': 'small'}}>role: </Text>
-            <Text color='accent-3' margin={{'bottom': 'small'}}>relationship: </Text>
+        background='brand'
+        width="90%">
+        <Box className='profile' pad='medium'>
+          <Heading level={3} color='accent-1'>Personal Info</Heading>
+          <Box direction='row' >
+            <Text className='user' color='accent-3' margin={{'bottom': 'small'}}>username: </Text>
+            <Text className='info' color='accent-3' margin={{'bottom': 'small'}}>{ user.username }</Text>
           </Box>
-          <Box pad="medium" className='info'>
-            <Text color='accent-3' margin={{'bottom': 'small'}}>{ user.username }</Text>
-            <Text color='accent-3' margin={{'bottom': 'small'}}>{ user.email}</Text>
-            <Text color='accent-3' margin={{'bottom': 'small'}}>{ user.role }</Text>
-            <Text color='accent-3' margin={{'bottom': 'small'}}>{ user.relationship }</Text>
+          <Box direction='row' >
+            <Text className='user' color='accent-3' margin={{'bottom': 'small'}}>email:</Text>
+            <Text className='info' color='accent-3' margin={{'bottom': 'small'}}>{ user.email}</Text>
+          </Box>
+          <Box direction='row' >
+            <Text className='user' color='accent-3' margin={{'bottom': 'small'}}>role: </Text>
+            <Text className='info' color='accent-3' margin={{'bottom': 'small'}}>{ user.role }</Text>
+          </Box>
+          <Box direction='row' >
+            <Text className='user' color='accent-3' margin={{'bottom': 'small'}}>relationship: </Text>
+            <Text className='info' color='accent-3' margin={{'bottom': 'small'}}>{ user.relationship }</Text>
           </Box>
         </Box>
-        <Heading level={3} color='accent-1'>Baby Info</Heading>
-        <Box direction='row'>
 
-          <Box pad="medium" className='user'>
-            <Text margin={{'bottom': 'small'}}>nickname: </Text>
-            <Text margin={{'bottom': 'small'}}>invite code: </Text>
-            <Text margin={{'bottom': 'small'}}>due date: </Text>
+        <Box pad='medium'>
+          <Heading level={3} color='accent-1'>Baby Info</Heading>
+          <Box direction='row' >
+            <Text className='user' color='accent-3' margin={{'bottom': 'small'}}>nickname: </Text>
+            <Text className='info' color='accent-3' margin={{'bottom': 'small'}}>{ baby.nickname }</Text>
           </Box>
-          <Box pad="medium" className='info'>
-            <Text margin={{'bottom': 'small'}}>{ baby.nickname }</Text>
-            <Text margin={{'bottom': 'small'}}>{ baby.invite_code }</Text>
-            <Text margin={{'bottom': 'small'}}>{ moment(baby.due_date).format("MMM Do, YYYY") }</Text>
+          <Box direction='row' >
+            <Text className='user' color='accent-3' margin={{'bottom': 'small'}}>invite code: </Text>
+            <Text className='info' color='accent-3' margin={{'bottom': 'small'}}>{ baby.invite_code }</Text>
+          </Box>
+          <Box direction='row' >
+            <Text className='user' color='accent-3' margin={{'bottom': 'small'}}>due date: </Text>
+            <Text className='info' color='accent-3' margin={{'bottom': 'small'}}>{ moment(baby.due_date).format("MMM Do, YYYY") }</Text>
+          </Box>
+          <Box direction='row' >
+            <Text className='user' color='accent-3' margin={{'bottom': 'small'}}>invited voters: </Text>
+            <Text className='info' color='accent-3' margin={{'bottom': 'small'}}>{voters}</Text>
           </Box>
         </Box>
       </Box>

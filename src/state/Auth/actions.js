@@ -59,7 +59,7 @@ export const signup = (user) => {
         dispatch(authenticationFailure(body.errors))
         dispatch(finishFetchRequest())
       } else if (!body.errors && !body.user) {
-        dispatch(authenticationFailure(body.errors))
+        dispatch(authenticationFailure(body))
         dispatch(finishFetchRequest())
       } else {
         console.log(body)

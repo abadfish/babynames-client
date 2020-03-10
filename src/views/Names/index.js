@@ -4,8 +4,14 @@ import NameTable from './NameTable'
 
 const Names = (props) => {
 
-  const names = props.baby.names
-  const filteredNames = names ? names.filter(n => n.status !== 'pending' || n.status !== 'rejected') : []
+  const names = props.baby.names ?
+    props.baby.names.sort(function(a, b) {
+      return b.rating - a.rating
+    })
+    : []
+  // const filteredNames = names ? names.filter(n => n.status !== 'pending' && n.status !== 'rejected') : []
+  const filteredNames = names ? names.filter(n => n.status !==  'rejected') : []
+
   const [daysLeft, setDaysLeft] = useState(0)
 
   useEffect(() => {

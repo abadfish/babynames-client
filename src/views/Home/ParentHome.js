@@ -36,20 +36,24 @@ const ParentHome = (props) => {
           style={{ color: '#f3f3f3'}}
           label='Add Name'
           icon={ <Add color='accent-3' /> }
-          onClick={ () => setShowForm(true) }>
-        </Button>
+          onClick={ () => setShowForm(true) }
+        />
       </Box>
       {showForm && (
         <Layer
           onEsc={() => setShowForm(false)}
           onClickOutside={() => setShowForm(false)}
         >
-          <Box pad='medium'>
+          <Box pad='medium' background='dark-1'>
             <NameForm onSubmit={ handleAddName } />
-            <Button
-              label="close"
-              onClick={() => setShowForm(false)}
-            />
+            <Box>
+              <Button
+                label="close"
+                primary
+                color='accent-3'
+                onClick={() => setShowForm(false)}
+              />
+            </Box>
           </Box>
         </Layer>
       )}

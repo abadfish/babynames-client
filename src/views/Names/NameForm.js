@@ -14,9 +14,13 @@ const NameForm = (props) => {
     const { name, value } = e.target
     setName({ ...babyName, [name]: value })
   }
-  
+
   const handleSubmit = () => {
-    props.onSubmit(babyName)
+    if (babyName.given_name === '') {
+      alert('Name field cannot be empty.')
+    } else {
+      props.onSubmit(babyName)
+    }
   }
 
 
@@ -24,17 +28,25 @@ const NameForm = (props) => {
     <div>
       <Box align="center" >
         <Form>
-          <Box pad="xsmall"  >
+          <Box pad="xsmall" margin={{ bottom: 'small' }}>
             <TextInput
+              border='accent-3'
               placeholder="name"
               name='given_name'
               value={ babyName.given_name }
               onChange={ handleOnChange }
             />
           </Box>
-
-          <Box pad="small" align="center">
-            <Button  pad="medium" type='submit' primary label='Add' onClick={ handleSubmit } />
+          <Box align="center">
+            <Button
+              fill='horizontal'
+              pad="medium"
+              margin={{ bottom: 'small' }}
+              type='submit'
+              primary
+              label='add'
+              onClick={ handleSubmit }
+            />
           </Box>
         </Form>
       </Box>
